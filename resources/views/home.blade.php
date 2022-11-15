@@ -84,11 +84,13 @@ body {
   <a class="active" href="#home">Home</a>
   <a href="/profile/edit">Update details</a>
   <a href="/profile/password">Update password</a>
+  <a href="/upload">Upload a file</a>
   <div class="search-container">
-    <form action="/action_page.php">
-      <input type="text" placeholder="Search.." name="search">
-      <button type="submit"><i class="fa fa-search"></i></button>
-    </form>
+  <form method="POST" action="/serp" role="search" class="search-bar">
+                    {{ csrf_field() }}
+                    <input type="text" placeholder="Search..." name="p">
+                    <button type="submit">Search</button>
+                </form>
   </div>
 </div>
 

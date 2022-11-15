@@ -21,36 +21,117 @@
 
             .a{
                 text-align:center;
+                color: white;
+                margin-top:50px;
             }
             .b{
                 text-align:center;
+                color: white;
             }
             .c{
                 text-align:center;
+                color: white;
             }
+            *{
+                margin:0;
+                padding:0;
+                box-sizing: border-box;
+                font-family: 'Poppins', sans-serif;
+            }
+
+            .container{
+                width:100%;
+                min-height: 100vh;
+                padding: 5%;
+                background-color: black;
+                background-position:center;
+                background-size:cover;
+                display:flex;
+                justify-content: center;
+            }
+
+            .container2{
+                background-position:center;
+                background-size:cover;
+                display:flex;
+                justify-content: center;
+            }
+            
+            .search-bar{
+                width:100%;
+                max-width:700px;
+                background: rgba(255, 255, 255, 0.2);
+                display:flex;
+                align-items:center;
+                border-radius: 60px;
+                padding: 10px 20px;
+                backdrop-filter: blur(4px) saturate(180%);
+            }
+
+            
+            .search-bar input{
+                background: transparent;
+                flex:1;
+                border:0;
+                outline:none;
+                padding:24px 20px;
+                font-size: 20px;
+                color: #cac7ff;
+            }
+
+            ::placeholder{
+                color: #cac7ff;
+            }
+
+            .search-bar button img{
+                width:25px;
+
+            }
+
+            .search-bar button{
+                border:0;
+                border-radius: 50%;
+                width:60px;
+                height:60px;
+                background: #58629b;
+                cursor: pointer;
+            }
+
+            
         </style>
     </head>
     <body class="antialiased">
         <h1 style="background-color:yellow" class="text-center">Digital library</h1>
         <div>
+            
             @if (Route::has('login'))
-                <div>
-                    @auth
+            <div class="container">    
+            <div>
+                <form method="POST" action="/rp" role="search" class="search-bar">
+                    {{ csrf_field() }}
+                    <input type="text" placeholder="Search..." name="p">
+                    <button type="submit">Search</button>
+                </form>
+
+                @auth
                     <p class="c">
                         <a href="{{ url('/home') }}">Home</a>
                     @else
-                    </p>
                     <p class="a">
-                        <a href="{{ route('login') }}" >Log in</a>
+                        <a href="{{ route('login') }}" >Log in  </a>
                     </p>
-
+                    <br>
                     <p class="b">
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}">Register</a>
                         @endif
                     </p>
-                    @endauth
-                </div>
+                    </p>
+                    </div>
+                @endauth
+            </div>
+            
+            
             @endif
 
         </div>
