@@ -4,12 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="icon" href="/book.png">
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('name', 'Digital library') }}</title>
 
-    <style>
+    <style> 
         
     </style>
     <!-- Scripts -->
@@ -28,6 +30,10 @@
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
+
+    <!-- google reCaptcha -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 </head>
 <body>
     <div id="app">
@@ -90,6 +96,13 @@
             @yield('content')
         </main>
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+@include('footer')
 
 </body>
 </html>

@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use App\Rules\Captcha;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 
 class CreateNewUser implements CreatesNewUsers
@@ -30,12 +31,21 @@ class CreateNewUser implements CreatesNewUsers
                 Rule::unique(User::class),
             ],
             'password' => $this->passwordRules(),
+            'g-captcha-response' => new Captcha(),
+            'g-recaptcha-response' => 'required|captcha',
+            'g-recaptcha-response.required' => 'Please tick the check box to confirm you are not a robot'
+    
         ])->validate();
 
         return User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
+            // 'g-recaptcha-response' => 'required|captcha',
+
+
         ]);
-    }
+
+        
+}
 }

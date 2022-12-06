@@ -8,6 +8,7 @@
 
 <head>
       <title>Upload details</title>
+      <link rel="icon" href="/book.png">
    </head>
 	
    <body>

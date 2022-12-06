@@ -1,6 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
+<html>
+    <head>
+    <link rel="icon" href="/book.png">
+    <script type="text/javascript">
+        function recaptchaCallback(response){
+            console.log(response);
+            $("#loginBtn").attr("disabled",false);
+        }
+        </script>
+</head>
+
+    </html>
+
+
 
 <div class="container">
     <div class="row justify-content-center">
@@ -40,21 +54,19 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
+                        <div class = "mt-4" >
+                             {!! NoCaptcha::renderJs() !!}
+                            {!! NoCaptcha::display(['data-callback' => 'recaptchaCallback']) !!}
+                          
                         </div>
+
+                        <br>
+                        <br>
 
                         <div class="mb-0 form-group row">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+
+                                <button type="submit" id="loginBtn" disabled class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
 

@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+<link rel="icon" href="/book.png">
+
+<script src="https://www.google.com/recaptcha/api.js?onload=CaptchaCallback&render=explicit" async defer></script>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -60,7 +64,19 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
+                       
+                        <div class = "mt-4" >
+                            {!! NoCaptcha::renderJs() !!}
+                            {!! NoCaptcha::display() !!}
 
+                        </div>
+                        @if ($errors->has('g-recaptcha-response'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                            </span>
+                        @endif
+
+                        <br>
                         <div class="mb-0 form-group row">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

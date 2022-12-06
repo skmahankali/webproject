@@ -5,6 +5,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="icon" href="/book.png">
+
+
   <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -59,7 +63,7 @@ body {
     line-height: 1.42857143;
     vertical-align: top;
     border-top: 1px solid #ddd;
-    background-color: black;
+    background-color: #292c2f;
     }
     .dataTables_wrapper .dataTables_paginate .paginate_button {
     box-sizing: border-box;
@@ -112,11 +116,11 @@ body {
 <div class="container box">
 <?php
       require '\xampp\htdocs\webproject\vendor\autoload.php';
-      $p = preg_replace('#(<[^>]+?[\x00-\x20"\'])(?:on|xmlns)[^>]*+>#iu', '$1>', $query_string);
+      $p = trim(preg_replace('/ +/', ' ', preg_replace('/[^A-Za-z0-9 ]/', ' ', urldecode(html_entity_decode(strip_tags($query_string))))));
       $client = Elastic\Elasticsearch\ClientBuilder::create()->build();
-      $wd = strip_tags($_POST['p']);
+      // $wd = strip_tags($_POST['p']);
       $params = [
-        'index' =>'id_kib',
+        'index' =>'id_kib1',
         'body' => [
           'query' => [
             'bool' => [
@@ -138,18 +142,18 @@ body {
             echo "No Results found";
         }
         else{
-        $score = $response['hits']['hits'][0]['_score'];
+        ($score = $response['hits']['hits'][0]['_score']);
  
   if ($total == 0){
     echo'<div style="text-align:center;" class="alert alert-danger success-block">';
-     echo '<p class="head">No Results Found..!</p>';
+    echo '<p class="head">No Results Found..!</p>';
   }
 
   else{
     $score = $response['hits']['hits'][0]['_score'];
     echo
     "<div>  
-    <h3><b><i>$total search results for $wd</b></i><h3>
+    <h3><b><i>$total search results for $p</b></i><h3>
     </div>";
     echo 
     '<table class="table table-stripped" id="dt1">
